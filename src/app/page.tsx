@@ -1,6 +1,8 @@
 import Players from "@/components/Players";
 import { getLeaderboard } from "@/database";
 
+export const revalidate = 0;
+
 export default async function Leaderboard() {
   const leaderboard = await getLeaderboard();
 
