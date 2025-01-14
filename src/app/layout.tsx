@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-export const CrumblSansFont = localFont({
+const CrumblSansFont = localFont({
   variable: "--font-crumbl-sans",
   display: "swap",
   src: [
