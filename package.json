@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@redis/client": "^1.6.0",
+    "@types/lodash": "^4.17.14",
     "clsx": "^2.1.1",
+    "lodash": "^4.17.21",
     "next": "15.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
