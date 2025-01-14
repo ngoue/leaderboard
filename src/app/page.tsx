@@ -91,10 +91,14 @@ export default function Leaderboard() {
               </div>
               <div className="flex flex-col justify-between items-center gap-y-4">
                 <div className="flex flex-col justify-between items-center gap-y-2">
-                  <p className="text-black">Wins: {wins}</p>
                   <p className="text-black">
-                    Rate: {games === 0 ? "-" : Math.trunc((wins / games) * 100)}
-                    %
+                    Wins: <span className="font-extrabold">{wins}</span>
+                  </p>
+                  <p className="text-black">
+                    Rate:{" "}
+                    <span className="font-extrabold">
+                      {games === 0 ? "-" : Math.trunc((wins / games) * 100)}%
+                    </span>
                   </p>
                 </div>
                 <div className="flex flex-row gap-x-2 mb-2">
