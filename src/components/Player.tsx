@@ -8,6 +8,7 @@ export type PlayerProps = Player & {
   rate: string;
   relativeWins: number;
   height: string;
+  imageSizePercent: number;
   onWin: () => Promise<void>;
   onLoss: () => Promise<void>;
 };
@@ -18,6 +19,7 @@ export default function Player({
   rate,
   relativeWins,
   height,
+  imageSizePercent,
   onWin,
   onLoss,
 }: PlayerProps) {
@@ -26,11 +28,15 @@ export default function Player({
       key={name}
       className={clsx(name, "flex flex-col max-h-[80vh] transition-all")}
     >
-      <div className="size-28 md:size-36 lg:size-44 xl:size-52">
+      <div className="flex flex-col justify-end items-center size-28 md:size-36 lg:size-44 xl:size-52">
         <Image
           priority
           alt={`${name} headshot`}
           src={`/images/${name}.png`}
+          style={{
+            width: `${imageSizePercent}%`,
+            height: `${imageSizePercent}%`,
+          }}
           width={256}
           height={256}
         />

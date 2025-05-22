@@ -3,4 +3,8 @@ export type Player = {
   wins: number;
 };
 
-export type Leaderboard = Player[];
+export type Leaderboard = {
+  id: string;
+  title: string;
+  players: Player[];
+};

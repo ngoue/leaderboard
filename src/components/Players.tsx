@@ -1,21 +1,21 @@
 "use client";
 
-import { Leaderboard } from "@/types";
+import { Leaderboard as LeaderboardType, Player as PlayerType } from "@/types";
 import { useState } from "react";
 import Player from "./Player";
 import { recordLoss, recordWin } from "@/database";
 
 export type PlayersProps = {
-  initial: Leaderboard;
+  initial: LeaderboardType;
 };
 
 export default function Players({ initial }: PlayersProps) {
   const [leaderboard, setLeaderboard] = useState(initial);
-  const wins = leaderboard.map(({ wins }) => wins);
+  const wins = leaderboard.players.map(({ wins }) => wins);
   const games = wins.reduce((acc, curr) => acc + curr, 0);
   const maxWins = Math.max(...wins);
   const minWins = Math.min(...wins);
-  const players = leaderboard.map((player) => ({
+  const players = leaderboard.players.map((player) => ({
     ...player,
     relativeWins: player.wins - minWins,
     rate: games === 0 ? "-" : `${Math.trunc((player.wins / games) * 100)}`,
@@ -28,13 +28,21 @@ export default function Players({ initial }: PlayersProps) {
   }));
 
   const handleWin = async (name: string) => {
-    const result = await recordWin(name);
+    const result = await recordWin(leaderboard.id, name);
     setLeaderboard(result);
   };
 
   const handleLoss = async (name: string) => {
-    const result = await recordLoss(name);
+    const result = await recordLoss(leaderboard.id, name);
     setLeaderboard(result);
+  };
+
+  const getSizePercentForPlayer = (
+    leaderboard: LeaderboardType,
+    player: PlayerType
+  ): number => {
+    const mostWins = Math.max(...leaderboard.players.map((p) => p.wins));
+    return mostWins === 0 ? 100 : (player.wins / mostWins) * 100;
   };
 
   return (
@@ -44,6 +52,7 @@ export default function Players({ initial }: PlayersProps) {
           key={player.name}
           onWin={() => handleWin(player.name)}
           onLoss={() => handleLoss(player.name)}
+          imageSizePercent={getSizePercentForPlayer(leaderboard, player)}
           {...player}
         />
       ))}
