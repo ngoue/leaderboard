@@ -20,7 +20,7 @@ export default async function Leaderboard() {
             <Link
               key={leaderboard.id}
               href={`/${leaderboard.id}`}
-              className="border-2 border-primary rounded-md px-4 pt-4 m-2 hover:bg-primary/20 transition-all duration-200 ease-in-out"
+              className="border-2 border-primary rounded-md px-4 pt-4 m-2 hover:bg-primary/20 transition-all duration-200 ease-in-out hover:cursor-pointer"
             >
               <div className="flex flex-col gap-4">
                 <h2 className="font-extrabold text-black dark:text-primary text-lg lg:text-2xl">
