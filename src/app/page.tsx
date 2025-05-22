@@ -2,7 +2,6 @@ import sortBy from "lodash/sortBy";
 import { getLeaderboards } from "@/database";
 import Link from "next/link";
 import Image from "next/image";
-import { Leaderboard as LeaderboardType, Player } from "@/types";
 
 export const revalidate = 0;
 
