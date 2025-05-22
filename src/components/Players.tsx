@@ -53,6 +53,7 @@ export default function Players({ initial }: PlayersProps) {
           onWin={() => handleWin(player.name)}
           onLoss={() => handleLoss(player.name)}
           imageSizePercent={getSizePercentForPlayer(leaderboard, player)}
+          viewTransitionKey={`player-image-${leaderboard.id}-${player.name}`}
           {...player}
         />
       ))}

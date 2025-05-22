@@ -1,3 +1,4 @@
+import { unstable_ViewTransition as ViewTransition } from "react";
 import sortBy from "lodash/sortBy";
 import { getLeaderboards } from "@/database";
 import Link from "next/link";
@@ -29,18 +30,20 @@ export default async function Leaderboard() {
                   {sortBy(leaderboard.players, ["wins"])
                     .reverse()
                     .map((player) => (
-                      <div
+                      <ViewTransition
                         key={player.name}
-                        className="flex flex-col justify-end size-24 lg:size-40"
+                        name={`player-image-${leaderboard.id}-${player.name}`}
                       >
-                        <Image
-                          priority
-                          alt={`${player.name} headshot`}
-                          src={`/images/${player.name}.png`}
-                          width={256}
-                          height={256}
-                        />
-                      </div>
+                        <div className="flex flex-col justify-end size-24 lg:size-40">
+                          <Image
+                            priority
+                            alt={`${player.name} headshot`}
+                            src={`/images/${player.name}.png`}
+                            width={256}
+                            height={256}
+                          />
+                        </div>
+                      </ViewTransition>
                     ))}
                 </div>
               </div>

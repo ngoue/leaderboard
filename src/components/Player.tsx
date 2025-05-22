@@ -1,5 +1,6 @@
 "use client";
 
+import { unstable_ViewTransition as ViewTransition } from "react";
 import type { Player } from "@/types";
 import Image from "next/image";
 import clsx from "clsx";
@@ -9,6 +10,7 @@ export type PlayerProps = Player & {
   relativeWins: number;
   height: string;
   imageSizePercent: number;
+  viewTransitionKey: string;
   onWin: () => Promise<void>;
   onLoss: () => Promise<void>;
 };
@@ -20,6 +22,7 @@ export default function Player({
   relativeWins,
   height,
   imageSizePercent,
+  viewTransitionKey,
   onWin,
   onLoss,
 }: PlayerProps) {
@@ -28,19 +31,21 @@ export default function Player({
       key={name}
       className={clsx(name, "flex flex-col max-h-[80vh] transition-all")}
     >
-      <div className="flex flex-col justify-end items-center size-28 md:size-36 lg:size-44 xl:size-52">
-        <Image
-          priority
-          alt={`${name} headshot`}
-          src={`/images/${name}.png`}
-          style={{
-            width: `${imageSizePercent}%`,
-            height: `${imageSizePercent}%`,
-          }}
-          width={256}
-          height={256}
-        />
-      </div>
+      <ViewTransition name={viewTransitionKey}>
+        <div className="flex flex-col justify-end items-center size-28 md:size-36 lg:size-44 xl:size-52">
+          <Image
+            priority
+            alt={`${name} headshot`}
+            src={`/images/${name}.png`}
+            style={{
+              width: `${imageSizePercent}%`,
+              height: `${imageSizePercent}%`,
+            }}
+            width={256}
+            height={256}
+          />
+        </div>
+      </ViewTransition>
       <div
         className={clsx(
           "flex flex-col justify-between items-center bg-primary rounded-t min-h-24 transition-all",
