@@ -42,7 +42,7 @@ export default function Players({ initial }: PlayersProps) {
     player: PlayerType
   ): number => {
     const mostWins = Math.max(...leaderboard.players.map((p) => p.wins));
-    return mostWins === 0 ? 100 : (player.wins / mostWins) * 100;
+    return mostWins === 0 ? 100 : Math.max((player.wins / mostWins) * 100, 40);
   };
 
   return (
